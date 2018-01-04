@@ -1,0 +1,10 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <form method="post">
+        <input type="text" name="title" value="{{ title }}" required>
+        <textarea name="content" required>{{ content }}</textarea>
+        <input type="text" name="tag" value="{{ tag }}" required>
+        <input type="submit">
+    </form>
+{% endblock %}

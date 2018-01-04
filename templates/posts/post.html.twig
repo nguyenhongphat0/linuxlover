@@ -1,0 +1,12 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <h1>{{ post.title }}</h1>
+    {% if app.session.get('user') %}
+        <a href="{{ path('editpost', {id: post.id}) }}">Edit</a>
+        <a href="{{ path('deletepost', {id: post.id}) }}">Delete</a>
+        <br/>
+    {% endif %}
+    <sub>{{ post.postedAt | date }}</sub>
+    <p>{{ content.content | raw }}</p>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <h1>Post list</h1>
+    <div>
+        {% for post in posts %}
+            <a href="{{ path('showpost', {id: post.id}) }}"><div>{{ post.id }} -> {{ post.title }} -> {{ post.tag }} -> {{ post.postedAt | date() }}</div></a>
+        {% endfor %}
+    </div>
+{% endblock %}

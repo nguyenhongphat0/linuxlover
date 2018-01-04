@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body>
+        {% block header %}
+            {% if app.session.get('user') %}
+                <div>
+                    {{ app.session.get('user') }}
+                    <a href="{{ path('logout') }}"><button>Logout</button></a>
+                </div>
+            {% endif %}
+        {% endblock %}
+        {% block flash %}
+            {% for key, value in app.flashes %}
+                {% for item in value %}
+                    <div class="flash-{{ key }}">
+                        {{ item | raw }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        {% endblock %}
+        {% block body %}{% endblock %}
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>
