@@ -3,6 +3,10 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block link %}
+            <link rel="stylesheet" href="/css/bulma.css">
+            <link rel="stylesheet" href="/css/style.css">
+        {% endblock %}
         {% block stylesheets %}{% endblock %}
     </head>
     <body>

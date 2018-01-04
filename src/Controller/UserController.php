@@ -24,6 +24,8 @@ class UserController extends Controller
      * @Route("/login", name="login")
      */
     public function login(Request $request, AuthenticationUtils $authenticationUtils) {
+        if ($this->getUser())
+            throw new AccessDeniedException();
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
         return $this->render('pages/login.html.twig', array(
