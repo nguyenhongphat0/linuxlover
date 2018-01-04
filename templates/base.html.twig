@@ -7,10 +7,15 @@
     </head>
     <body>
         {% block header %}
-            {% if app.session.get('user') %}
+            {% if app.user %}
                 <div>
-                    {{ app.session.get('user') }}
+                    {{ app.user.username }}
                     <a href="{{ path('logout') }}"><button>Logout</button></a>
+                </div>
+            {% else %}
+                <div>
+                    <a href="{{ path('login') }}"><button>Log In</button></a>
+                    <a href="{{ path('signin') }}"><button>Sign In</button></a>
                 </div>
             {% endif %}
         {% endblock %}

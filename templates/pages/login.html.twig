@@ -1,10 +1,13 @@
 {% extends "base.html.twig" %}
-{% block title %}Login{% endblock %}
+{% block title %}Log in{% endblock %}
 {% block body %}
-    <form method="post">
+    {% if error %}
+        <div>{{ error.messageKey | json_encode }}</div>
+    {% endif %}
+    <form action="{{ path('login') }}" method="post">
         <h1>Welcome back, User!</h1>
-        <input type="text" name="username">
-        <input type="password" name="password">
+        <input type="text" name="_username" value="{{ last_username }}" required>
+        <input type="password" name="_password" required>
         <input type="submit" value="Login">
     </form>
 {% endblock %}

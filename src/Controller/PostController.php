@@ -28,21 +28,19 @@ class PostController extends Controller
     /**
      * @Route("/post/{id}", name="showpost", requirements={"id"="\d+"})
      */
-    public function showPost(Post $post) {
-        $repo = $this->getDoctrine()->getRepository(PostContent::class);
-        $content = $repo->find($post->getId());
+    public function showPost(Post $post, PostContent $content) {
+        $comments = $post->getComments();
         return $this->render("posts/post.html.twig", [
             'post' => $post,
-            'content' => $content
+            'content' => $content,
+            'comments' => $comments
         ]);
     }
 
     /**
      * @Route("/post/create", name="createpost", methods="GET")
      */
-    public function createPost(SessionInterface $session) {
-        if (!$session->get('user'))
-            throw $this->createNotFoundException();
+    public function createPost() {
         return $this->render('posts/form.html.twig', [
             'title' => '',
             'tag' => '',
@@ -53,9 +51,7 @@ class PostController extends Controller
     /**
      * @Route("/post/create", name="addpost", methods="POST")
      */
-    public function addPost(Request $request, SessionInterface $session) {
-        if (!$session->get('user'))
-            throw $this->createNotFoundException();
+    public function addPost(Request $request) {
         // Get post information
         $title = $request->get('title');
         $tag = $request->get('tag');
@@ -88,17 +84,7 @@ class PostController extends Controller
     /**
      * @Route("/post/edit/{id}", name="editpost", methods="GET")
      */
-    public function editPost($id, SessionInterface $session) {
-        if (!$session->get('user'))
-            throw $this->createNotFoundException();
-        // Get repo
-        $postRepo = $this->getDoctrine()->getRepository(Post::class);
-        $contentRepo = $this->getDoctrine()->getRepository(PostContent::class);
-
-        // Get post and content by ID
-        $post = $postRepo->find($id);
-        $content = $contentRepo->find($id);
-
+    public function editPost(Post $post, PostContent $content) {
         return $this->render('posts/form.html.twig', [
             'title' => $post->getTitle(),
             'tag' => $post->getTag(),
@@ -109,17 +95,7 @@ class PostController extends Controller
     /**
      * @Route("/post/edit/{id}", name="updatepost", methods="POST")
      */
-    public function updatePost(Request $request, SessionInterface $session, $id) {
-        if (!$session->get('user'))
-            throw $this->createNotFoundException();
-        // Get repo
-        $postRepo = $this->getDoctrine()->getRepository(Post::class);
-        $contentRepo = $this->getDoctrine()->getRepository(PostContent::class);
-
-        // Get post and content by ID
-        $post = $postRepo->find($id);
-        $content = $contentRepo->find($id);
-
+    public function updatePost(Request $request, Post $post, PostContent $content) {
         // Edit post
         $post->setTitle($request->get('title'));
         $post->setTag($request->get('tag'));
@@ -130,20 +106,14 @@ class PostController extends Controller
         $this->getDoctrine()->getManager()->flush();
 
         // Show edited post
-        return $this->redirectToRoute('showpost', ['id' => $id]);
+        return $this->redirectToRoute('showpost', ['id' => $post->getId()]);
     }
 
     /**
      * @Route("/post/delete/{id}", name="deletepost")
      */
-    public function deletePost(SessionInterface $session, $id) {
-        if (!$session->get('user'))
-            throw $this->createNotFoundException();
+    public function deletePost(Post $post, PostContent $content) {
         $em = $this->getDoctrine()->getManager();
-        $postRepo = $this->getDoctrine()->getRepository(Post::class);
-        $contentRepo = $this->getDoctrine()->getRepository(PostContent::class);
-        $post = $postRepo->find($id);
-        $content = $contentRepo->find($id);
         $em->remove($post);
         $em->remove($content);
         $em->flush();

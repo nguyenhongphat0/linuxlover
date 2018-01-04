@@ -1,0 +1,39 @@
+security:
+    encoders:
+        App\Entity\User: plaintext
+#        Symfony\Component\Security\Core\User\User: plaintext
+
+    providers:
+        in_memory:
+            memory:
+                users:
+                    nguyenhongphat0:
+                        password: hongphat
+                        roles: 'USER'
+                    admin:
+                        password: admin
+                        roles: 'ADMIN'
+        in_database:
+            entity:
+                class: App\Entity\User
+                property: username
+
+    firewalls:
+#        dev:
+#            pattern: ^/(_(profiler|wdt)|css|images|js)/
+#            security: false
+        main:
+            pattern: ^/
+            anonymous: ~
+            provider: in_database
+            form_login:
+                login_path: /login
+                check_path: /login
+            logout:
+                path: /logout
+                target: /
+#
+    access_control:
+        - { path: ^/post/create, roles: ROLE_ADMIN }
+        - { path: ^/post/edit, roles: ROLE_ADMIN }
+        - { path: ^/post/delete, roles: ROLE_ADMIN }

@@ -1,0 +1,6 @@
+{% if app.user %}
+    <form action="{{ action }}" method="post">
+        <textarea name="content" required></textarea>
+        <input type="submit" value="Comment">
+    </form>
+{% endif %}

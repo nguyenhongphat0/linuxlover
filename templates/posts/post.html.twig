@@ -2,11 +2,15 @@
 
 {% block body %}
     <h1>{{ post.title }}</h1>
-    {% if app.session.get('user') %}
+    {% if is_granted('ROLE_ADMIN') %}
         <a href="{{ path('editpost', {id: post.id}) }}">Edit</a>
         <a href="{{ path('deletepost', {id: post.id}) }}">Delete</a>
         <br/>
     {% endif %}
     <sub>{{ post.postedAt | date }}</sub>
     <p>{{ content.content | raw }}</p>
+    <hr>
+    Comments
+    {{ include('comments/load-comments.html.twig', {'post': post}) }}
+
 {% endblock %}

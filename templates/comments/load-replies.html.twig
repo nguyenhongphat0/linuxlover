@@ -1,0 +1,7 @@
+{% for reply in comments %}
+    {% if reply.isReply %}
+        {% if reply.replyTo == comment %}
+            {{ include('comments/comment.html.twig', {'comment': reply, 'id': id, 'comments': comments}) }}
+        {% endif %}
+    {% endif %}
+{% endfor %}

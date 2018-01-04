@@ -1,0 +1,6 @@
+{{ include('comments/form.html.twig', {'action': path('comment', {'id': post.id})}) }}
+{% for comment in comments %}
+    {% if not comment.isReply %}
+        {{ include('comments/comment.html.twig', {'comment': comment, 'id': post.id, 'comments': comments}) }}
+    {% endif %}
+{% endfor %}

@@ -28,9 +28,13 @@ class PictureController extends Controller
     /**
      * @Route("/picture/upload", name="savingpicture", methods="POST")
      */
-    public function savingPicture(Request $request) {
+    public function savingPicture(Request $request, SessionInterface $session) {
+        if (!$session->get('user'))
+            return $this->createNotFoundException();
         $picture = $request->files->get('picture');
         $name = $request->get('name');
+        if ($name == 'upload')
+            return $this->createNotFoundException();
         $picture->move("picture", $name);
         $this->addFlash('notice', 'Picture uploaded <a href="/picture/'.$name.'" target="_blank">here</a> successfuly');
         return $this->redirectToRoute('uploadpicture');
