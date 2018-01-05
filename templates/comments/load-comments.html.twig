@@ -1,4 +1,7 @@
 {{ include('comments/form.html.twig', {'action': path('comment', {'id': post.id})}) }}
+{% if not app.user %}
+    <a href="{{ path('login') }}">Đăng nhập để bình luận</a href="{{ path('login') }}">
+{% endif %}
 {% for comment in comments %}
     {% if not comment.isReply %}
         {{ include('comments/comment.html.twig', {'comment': comment, 'id': post.id, 'comments': comments}) }}

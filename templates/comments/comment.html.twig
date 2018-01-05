@@ -1,13 +1,16 @@
 <div>
-    <b>
-        {% if comment.user.fullname %}
-            {{ comment.user.fullname }}
-        {% else %}
-            {{ comment.user.username }}
-        {% endif %}
-    </b> <i>{{ comment.user.email }}</i>
-    <p>{{ comment.content }}</p>
-    <div style="padding-left: 10%">
+    <div class="a-comment" onclick="document.getElementById('rep-for-{{ comment.id }}').classList.toggle('hidden')">
+        <h6>
+            {% if comment.user.fullname %}
+                {{ comment.user.fullname }}
+            {% else %}
+                {{ comment.user.username }}
+            {% endif %}
+        </h6> <i>{{ comment.user.email }}</i>
+        <p>{{ comment.content }}</p>
+        <sup id="length-of-{{ comment.id }}" class="length-of-comment"></sup>
+    </div>
+    <div style="padding-left: 8%" id="rep-for-{{ comment.id }}" class="hidden">
         {{ include('comments/load-replies.html.twig', {'comment': comment, 'id': id, 'comments': comments}) }}
         {{ include('comments/form.html.twig', {'action': path('comment', {'id': id, 'to': comment.id})}) }}
     </div>

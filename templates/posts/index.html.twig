@@ -1,10 +1,16 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-    <h1>Post list</h1>
+<div class="container">
+    <h1>Bài viết mới</h1>
     <div>
         {% for post in posts %}
-            <a href="{{ path('showpost', {id: post.id}) }}"><div>{{ post.id }} -> {{ post.title }} -> {{ post.tag }} -> {{ post.postedAt | date() }}</div></a>
+        <div>
+            <a href="{{ path('showpost', {id: post.id}) }}"><h5 style="display: inline">{{ post.title }}</h5></a>
+            - {{ post.postedAt | date('d/m/Y') }}
+            <p style="display: none">{{ post.tag }}</p>
+        </div>
         {% endfor %}
     </div>
+</div>
 {% endblock %}

@@ -1,13 +1,16 @@
 {% extends "base.html.twig" %}
 {% block title %}Log in{% endblock %}
 {% block body %}
+<div class="container">
     {% if error %}
         <div>{{ error.messageKey | json_encode }}</div>
     {% endif %}
     <form action="{{ path('login') }}" method="post">
-        <h1>Welcome back, User!</h1>
-        <input type="text" name="_username" value="{{ last_username }}" required>
-        <input type="password" name="_password" required>
-        <input type="submit" value="Login">
+        <h3>Chào mừng bạn quay trở lại! Nhập <b>tên tài khoản</b> và <b>mật khẩu</b> của bạn để đăng nhập nhé.</h3>
+        <input type="text" name="_username" value="{{ last_username }}" required autocomplete="off">
+        <input type="password" name="_password" required autocomplete="off">
+        <input type="submit" value="Đăng nhập" class="btn blue-grey darken-4">
+        <a href="{{ path('signin') }}" class="btn blue-grey-text text-darken-4 white">Chưa có tài khoản? Đăng ký</a>
     </form>
+</div>
 {% endblock %}

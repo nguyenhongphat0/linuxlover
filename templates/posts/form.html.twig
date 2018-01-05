@@ -1,10 +1,16 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
+<div class="container section">
     <form method="post">
+        <h5>Tiêu đề</h5>
         <input type="text" name="title" value="{{ title }}" required>
-        <textarea name="content" required>{{ content }}</textarea>
+        <h5>Nội dung</h5>
+        <a href="{{ path('uploadpicture') }}" target="_blank">+ Tải hình lên</a>
+        <textarea name="content" required class="comment-field" style="color: white; height: 50vh !important">{{ content }}</textarea>
+        <h5>Thẻ</h5>
         <input type="text" name="tag" value="{{ tag }}" required>
-        <input type="submit">
+        <input type="submit" class="btn green" value="Xong">
     </form>
+</div>
 {% endblock %}

@@ -4,29 +4,26 @@
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block link %}
-            <link rel="stylesheet" href="/css/bulma.css">
+            <link rel="stylesheet" href="/css/materialize.min.css">
             <link rel="stylesheet" href="/css/style.css">
         {% endblock %}
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
         {% block header %}
+        <div class="header">
+            <a href="/" class="headerbtn">Trang chủ</a> |
             {% if app.user %}
-                <div>
-                    {{ app.user.username }}
-                    <a href="{{ path('logout') }}"><button>Logout</button></a>
-                </div>
+                <a href="" class="headerbtn">{{ app.user.username }}</a> | <a href="{{ path('logout') }}" class="headerbtn">Đăng xuất</a>
             {% else %}
-                <div>
-                    <a href="{{ path('login') }}"><button>Log In</button></a>
-                    <a href="{{ path('signin') }}"><button>Sign In</button></a>
-                </div>
+                <a href="{{ path('login') }}" class="headerbtn">Đăng nhập</a> | <a href="{{ path('signin') }}" class="headerbtn">Đăng ký</a>
             {% endif %}
+        </div>
         {% endblock %}
         {% block flash %}
             {% for key, value in app.flashes %}
                 {% for item in value %}
-                    <div class="flash-{{ key }}">
+                    <div class="flash flash-{{ key }} btn white">
                         {{ item | raw }}
                     </div>
                 {% endfor %}

@@ -28,11 +28,11 @@ class PostController extends Controller
     /**
      * @Route("/post/{id}", name="showpost", requirements={"id"="\d+"})
      */
-    public function showPost(Post $post, PostContent $content) {
+    public function showPost(Post $post, PostContent $postContent) {
         $comments = $post->getComments();
         return $this->render("posts/post.html.twig", [
             'post' => $post,
-            'content' => $content,
+            'content' => $postContent,
             'comments' => $comments
         ]);
     }
@@ -84,23 +84,23 @@ class PostController extends Controller
     /**
      * @Route("/post/edit/{id}", name="editpost", methods="GET")
      */
-    public function editPost(Post $post, PostContent $content) {
+    public function editPost(Post $post, PostContent $postContent) {
         return $this->render('posts/form.html.twig', [
             'title' => $post->getTitle(),
             'tag' => $post->getTag(),
-            'content' => $content->getContent()
+            'content' => $postContent->getContent()
         ]);
     }
 
     /**
      * @Route("/post/edit/{id}", name="updatepost", methods="POST")
      */
-    public function updatePost(Request $request, Post $post, PostContent $content) {
+    public function updatePost(Request $request, Post $post, PostContent $postContent) {
         // Edit post
         $post->setTitle($request->get('title'));
         $post->setTag($request->get('tag'));
         $post->setPostedAt(new \DateTime());
-        $content->setContent($request->get('content'));
+        $postContent->setContent($request->get('content'));
 
         // Submit
         $this->getDoctrine()->getManager()->flush();
@@ -112,10 +112,10 @@ class PostController extends Controller
     /**
      * @Route("/post/delete/{id}", name="deletepost")
      */
-    public function deletePost(Post $post, PostContent $content) {
+    public function deletePost(Post $post, PostContent $postContent) {
         $em = $this->getDoctrine()->getManager();
         $em->remove($post);
-        $em->remove($content);
+        $em->remove($postContent);
         $em->flush();
         $this->addFlash('notice', $post->getTitle().' removed successfuly');
         return $this->redirectToRoute('posts');

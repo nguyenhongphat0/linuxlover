@@ -20,8 +20,7 @@ class PictureController extends Controller
      * @Route("/picture/upload", name="uploadpicture", methods="GET")
      */
     public function uploadPicture(SessionInterface $session) {
-        if (!$session->get('user'))
-            return $this->createNotFoundException();
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
         return $this->render('pages/upload-picture.html.twig');
     }
 
@@ -29,8 +28,7 @@ class PictureController extends Controller
      * @Route("/picture/upload", name="savingpicture", methods="POST")
      */
     public function savingPicture(Request $request, SessionInterface $session) {
-        if (!$session->get('user'))
-            return $this->createNotFoundException();
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
         $picture = $request->files->get('picture');
         $name = $request->get('name');
         if ($name == 'upload')

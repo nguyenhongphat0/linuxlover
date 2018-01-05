@@ -1,6 +1,7 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
+<div class="container section">
     <form method="post" enctype="multipart/form-data">
         Select picture
         <input type="file" name="picture">
@@ -8,6 +9,7 @@
         Save as
         <input type="text" name="name">
         <br>
-        <input type="submit" value="Upload">
+        <input type="submit" value="Upload" class="btn brown">
     </form>
+</div>
 {% endblock %}

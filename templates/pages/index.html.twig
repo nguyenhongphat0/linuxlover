@@ -1,10 +1,51 @@
 {% extends "base.html.twig" %}
 {% block title %}Trang chủ{% endblock %}
 {% block body %}
-    <div class="container ">
-        <h1 class="title is-1">Bạn yêu Linux? Chúng tôi cũng vậy!</h1>
-        <h5 class="subtitle is-5"></h5>
-        <button class="button is-primary">Tìm hiểu ngay</button>
-        <button class="button is-primary">Gia nhập nhóm</button>
+    <div class="container white-text center-align">
+        {% if not app.user %}
+            <h1>Chào mừng bạn đến với Linuxlover</h1>
+            <p>Bạn yêu Linux? Chúng tôi cũng vậy! Hãy gia nhập chúng tôi để tạo nên một cộng đồng Linux mạnh mẽ hơn ở Việt Nam nhé.</p>    
+            <a href="{{ path('signin') }}"><button class="btn btn-large light-green darken-2">Tuyệt vời, gia nhập ngay</button></a>
+            <a href="{{ path('posts') }}"><button class="btn btn-large blue-grey darken-4">Không biết linux là gì? Tìm hiểu thêm</button></a>
+        {% else %}
+            <h1>Xin chào, {{ app.user.username }}</h1>
+            <a href="{{ path('posts') }}"><button class="btn btn-large brown">Bài viết</button></a>
+            <a href="{{ path('posts') }}"><button class="btn btn-large blue-grey darken-4">Tài khoản</button></a>
+            <a href="{{ path('posts') }}"><button class="btn btn-large blue">Đóng góp</button></a>
+        {% endif %}
+        <pre class="arch-logo" style="font-family: Courier New, Courier, monospace; line-height: 18px">
+  -` 
+                 .o+`                
+                 `ooo/               
+              `+oooo:             
+                `+oooooo:               
+               -+oooooo+:              
+             `/:-:++oooo+:           
+            `/++++/+++++++:         
+           `/++++++++++++++:           
+          `/+++ooooooooooooo/`        
+         ./ooosssso++osssssso+`      
+        .oossssso-````/ossssss+`    
+         -osssssso.      :ssssssso.      
+        :osssssss/        osssso+++.    
+       /ossssssss/        +ssssooo/-   
+      `/ossssso+/:-        -:/+osssso+-   
+      `+sso+:-`                 `.-/+oso: 
+   `++:.                           `-/+/
+  .`                                 `/
+        </pre>
     </div>
+{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        body {
+            background-color: #24292E
+        }
+
+        .headerbtn {
+            font-size: 15px;
+            padding: 10px;
+        }
+    </style>
 {% endblock %}

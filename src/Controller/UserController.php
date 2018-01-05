@@ -59,9 +59,9 @@ class UserController extends Controller
         $repass = $request->get('re_password');
         $repo = $this->getDoctrine()->getRepository(User::class);
         if ($repo->findByUsername($username))
-            return $this->render("pages/signin.html.twig", ['message' => 'Username existed, please try another']);
+            return $this->render("pages/signin.html.twig", ['message' => 'Xin lỗi, tên tài khoản của bạn đã bị trùng, vui lòng chọn tên tài khoản khác bạn nhé']);
         if ($password != $repass)
-            return $this->render("pages/signin.html.twig", ['message' => 'Password not match']);
+            return $this->render("pages/signin.html.twig", ['message' => 'Mật khẩu không khớp']);
         $user = new User();
         $user->setUsername($username);
         $user->setPassword($password);
@@ -69,7 +69,7 @@ class UserController extends Controller
         $em = $this->getDoctrine()->getManager();
         $em->persist($user);
         $em->flush();
-        $this->addFlash('notice', 'Your account was created successfully! Now you can login with your account');
+        $this->addFlash('notice', 'Tài khoản của bạn đã được tạo thành công. Giờ bạn đã có thể đăng nhập bằng tài khoản vừa tạo');
         return $this->redirectToRoute('login');
     }
 }

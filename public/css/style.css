@@ -1,0 +1,89 @@
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 100;
+}
+
+img {
+    width: 100%;
+}
+
+.hidden {
+    display: none;
+}
+
+.light-text {
+    font-weight: 100;
+}
+
+.header {
+    background-color: #24292E;
+    color: white;
+    text-align: right;
+    font-size: 13px;
+    padding: 3px;
+}
+
+.headerbtn {
+    display: inline-block;
+    padding: 0px 10px;
+    color: white;
+}
+
+.flash {
+    text-transform: none !important;
+    margin: 20px 0px;
+}
+
+.flash-notice {
+    color: green;
+}
+.flash-warning {
+    color: yellow;
+}
+.flash-error {
+    color: red;
+}
+
+.a-comment {
+    margin: 10px 0px;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.a-comment p {
+    margin: 0px;
+}
+.a-comment:hover {
+    background-color: #263238;
+}
+
+.comment-field {
+    border: none !important;
+    background-color: #263238 !important;
+    border-radius: 10px !important;
+    height: 30px !important;
+    padding: 5px 35px 5px 15px !important;
+    box-sizing: border-box !important;
+    margin: 0px !important;
+}
+.comment-field:focus {
+    background-color: #37474f !important;
+    box-shadow: none !important;
+}
+.comment-button {
+    margin: 0px;
+    border: none;
+    height: 30px;
+    width: 30px;
+    border-radius: 0px 10px 10px 0px;
+    background-color: #37474f;
+    float: right;
+    position: relative;
+    top: -30px;
+}
+.comment-button:hover {
+    background-color: #263238;
+}
+.length-of-comment {
+    font-style: italic;
+    color: grey;
+}

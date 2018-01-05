@@ -1,7 +1,14 @@
+{% set d = 0 %}
 {% for reply in comments %}
     {% if reply.isReply %}
         {% if reply.replyTo == comment %}
+            {% set d = d + 1 %}
             {{ include('comments/comment.html.twig', {'comment': reply, 'id': id, 'comments': comments}) }}
         {% endif %}
     {% endif %}
 {% endfor %}
+<script>
+    var d = {{ d }};
+    if (d > 0)
+        document.getElementById('length-of-{{comment.id}}').innerText = d + " phản hồi";
+</script>
