@@ -83,7 +83,8 @@ img {
 .comment-button:hover {
     background-color: #263238;
 }
-.length-of-comment {
+.subinfo {
     font-style: italic;
     color: grey;
+    font-size: 10px;
 }

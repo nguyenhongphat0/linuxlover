@@ -1,14 +1,15 @@
 <div>
     <div class="a-comment" onclick="document.getElementById('rep-for-{{ comment.id }}').classList.toggle('hidden')">
-        <h6>
+        <h6 style="display: inline">
             {% if comment.user.fullname %}
                 {{ comment.user.fullname }}
             {% else %}
                 {{ comment.user.username }}
             {% endif %}
-        </h6> <i>{{ comment.user.email }}</i>
+        </h6>
+        {# - <span class="subinfo">{{ comment.commentAt | date('d/m/Y h:m:sA') }}</span> #}
         <p>{{ comment.content }}</p>
-        <sup id="length-of-{{ comment.id }}" class="length-of-comment"></sup>
+        <sup id="length-of-{{ comment.id }}" class="subinfo"></sup>
     </div>
     <div style="padding-left: 8%" id="rep-for-{{ comment.id }}" class="hidden">
         {{ include('comments/load-replies.html.twig', {'comment': comment, 'id': id, 'comments': comments}) }}

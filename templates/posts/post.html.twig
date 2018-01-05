@@ -9,7 +9,7 @@
             <a href="#" onclick="deletePost()">Delete</a>
             <br/>
         {% endif %}
-        <sub>{{ post.postedAt | date }}</sub>
+        <sub>{{ post.postedAt | date('d/m/Y h:m:s A') }}</sub>
         <p>{{ content.content | raw }}</p>
     </div>
 </div>
