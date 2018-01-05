@@ -40,16 +40,16 @@ class UserController extends Controller
     public function logout() {}
 
     /**
-     * @Route("/signin", name="signin", methods="GET")
+     * @Route("/signup", name="signup", methods="GET")
      */
-    public function signin() {
+    public function signup() {
         if ($this->getUser())
             throw new AccessDeniedException();
-        return $this->render("pages/signin.html.twig", ['message' => '']);
+        return $this->render("pages/signup.html.twig", ['message' => '']);
     }
 
     /**
-     * @Route("/signin", name="register", methods="POST")
+     * @Route("/signup", name="register", methods="POST")
      */
     public function register(Request $request) {
         if ($this->getUser())
@@ -59,9 +59,9 @@ class UserController extends Controller
         $repass = $request->get('re_password');
         $repo = $this->getDoctrine()->getRepository(User::class);
         if ($repo->findByUsername($username))
-            return $this->render("pages/signin.html.twig", ['message' => 'Xin lỗi, tên tài khoản của bạn đã bị trùng, vui lòng chọn tên tài khoản khác bạn nhé']);
+            return $this->render("pages/signup.html.twig", ['message' => 'Xin lỗi, tên tài khoản của bạn đã bị trùng, vui lòng chọn tên tài khoản khác bạn nhé']);
         if ($password != $repass)
-            return $this->render("pages/signin.html.twig", ['message' => 'Mật khẩu không khớp']);
+            return $this->render("pages/signup.html.twig", ['message' => 'Mật khẩu không khớp']);
         $user = new User();
         $user->setUsername($username);
         $user->setPassword($password);

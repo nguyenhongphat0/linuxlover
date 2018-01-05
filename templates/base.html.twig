@@ -16,7 +16,7 @@
             {% if app.user %}
                 <a href="" class="headerbtn">{{ app.user.username }}</a> | <a href="{{ path('logout') }}" class="headerbtn">Đăng xuất</a>
             {% else %}
-                <a href="{{ path('login') }}" class="headerbtn">Đăng nhập</a> | <a href="{{ path('signin') }}" class="headerbtn">Đăng ký</a>
+                <a href="{{ path('login') }}" class="headerbtn">Đăng nhập</a> | <a href="{{ path('signup') }}" class="headerbtn">Đăng ký</a>
             {% endif %}
         </div>
         {% endblock %}
