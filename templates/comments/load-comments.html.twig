@@ -1,6 +1,9 @@
 {{ include('comments/form.html.twig', {'action': path('comment', {'id': post.id})}) }}
 {% if not app.user %}
-    <a href="{{ path('login') }}">Đăng nhập để bình luận</a href="{{ path('login') }}">
+    <form onclick="window.location.replace('{{ path('login') }}')">
+        <input type="text" name="content" autocomplete="off" required class="comment-field" value="Đăng nhập để bình luận" style="cursor: pointer; color: grey">
+        <div class="comment-button" style="text-align: center; line-height: 30px; cursor: pointer">&gt;</div>
+    </form>
 {% endif %}
 {% for comment in comments %}
     {% if not comment.isReply %}
